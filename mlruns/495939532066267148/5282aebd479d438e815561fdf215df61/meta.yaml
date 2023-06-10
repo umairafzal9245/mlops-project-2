@@ -1,0 +1,15 @@
+artifact_uri: file:///home/runner/work/mlops-project-2/mlops-project-2/mlruns/495939532066267148/5282aebd479d438e815561fdf215df61/artifacts
+end_time: 1686420584725
+entry_point_name: ''
+experiment_id: '495939532066267148'
+lifecycle_stage: active
+run_id: 5282aebd479d438e815561fdf215df61
+run_name: num_topics_10_passes_2
+run_uuid: 5282aebd479d438e815561fdf215df61
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1686420582106
+status: 3
+tags: []
+user_id: runner

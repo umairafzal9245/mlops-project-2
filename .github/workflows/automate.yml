@@ -23,6 +23,7 @@ jobs:
           REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
         run: |
           make install
+          dvc pull
           make trainmodel
           make testmodel
           git config --local user.email "action@github.com"
