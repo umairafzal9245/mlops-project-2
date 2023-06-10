@@ -1,0 +1,14 @@
+channels:
+- conda-forge
+dependencies:
+- python=3.10.6
+- pip<=23.1.2
+- pip:
+  - mlflow==2.4
+  - cloudpickle==2.2.1
+  - gensim==4.3.1
+  - google-api-core==2.11.0
+  - numpy==1.24.3
+  - requests==2.31.0
+  - scikit-learn==1.2.2
+name: mlflow-env
