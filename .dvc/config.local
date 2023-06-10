@@ -1,0 +1,3 @@
+['remote "drive"']
+    gdrive_user_credentials_file = ../durable-primacy-348317-9b288b06293d.json
+    gdrive_service_account_json_file_path = ../durable-primacy-348317-9b288b06293d.json
