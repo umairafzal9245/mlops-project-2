@@ -58,6 +58,7 @@ jobs:
           REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
         run: |
           make install
+          dvc pull
           make testapi
           make trainmodel
           make testmodel
