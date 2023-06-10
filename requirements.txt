@@ -1,0 +1,9 @@
+gensim
+pandas
+nltk
+numpy
+Flask
+flask-cors
+sentence-transformers
+Levenshtein
+mlflow

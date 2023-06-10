@@ -1,0 +1,67 @@
+name: FYP automation
+on:
+  push:
+    branches:
+      - developer-1
+      - developer-2
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+      
+jobs:
+  run-developer-1:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/developer-1'
+    steps:
+      - uses: actions/checkout@v2
+      - name: Running developer-1 automation
+        env: 
+          GH_TOKEN: ${{ github.token }}
+          REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+        run: |
+          make install
+          make trainmodel
+          make testmodel
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Add trained model file"
+          git push origin HEAD:developer-1
+
+  run-developer-2:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/developer-2'
+    steps:
+      - uses: actions/checkout@v2
+      - name: Running developer-2 automation
+        env: 
+          GH_TOKEN: ${{ github.token }}
+          REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+        run: |
+          make install
+          make testapi
+          
+  run-main:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.base.ref == 'main' && github.event.pull_request.merged == true
+    steps:
+      - uses: actions/checkout@v2
+      - name: Running Main automation
+        env: 
+          GH_TOKEN: ${{ github.token }}
+          REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+        run: |
+          make install
+          make testapi
+          make trainmodel
+          make testmodel
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Add trained model file"
+          git push origin HEAD:main
