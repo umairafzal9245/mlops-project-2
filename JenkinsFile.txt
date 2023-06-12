@@ -1,0 +1,51 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                // Clone the GitHub repository
+                git 'https://github.com/your/repo.git'
+            }
+        }
+
+        stage('Setup Virtual Environment') {
+            steps {
+                
+                bat 'venv\\Scripts\\activate.bat && python -m pip install -r requirements.txt'
+            }
+        }
+
+        stage('Pull Dataset') {
+            steps {
+                // Install and configure DVC
+                sh 'pip install dvc'
+                sh 'dvc init'
+                
+                // Pull the dataset using DVC
+                sh 'dvc pull'
+            }
+        }
+
+        stage('Train Model') {
+            steps {
+                // Execute your model training script
+                sh 'python model.py'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                // Build the Docker image
+                sh 'docker build -t your-image-name .'
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                // Run the Docker container
+                sh 'docker run -d -p 5000:5000 your-image-name'
+            }
+        }
+    }
+}
